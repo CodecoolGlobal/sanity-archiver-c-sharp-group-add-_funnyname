@@ -31,7 +31,6 @@ namespace SanityArchiver.Application.Models
             {
                 Console.WriteLine(e);
             }
-
             try
             {
                 numberOfResult = (int)files.Length;
@@ -40,8 +39,6 @@ namespace SanityArchiver.Application.Models
             {
                 Console.WriteLine(e);
             }
-            
-
             return (files,numberOfResult);
         }
     }
