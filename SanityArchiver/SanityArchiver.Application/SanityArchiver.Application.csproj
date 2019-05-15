@@ -44,8 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="apacuka.cs" />
     <Compile Include="Models\Archiver\FileArchiver.cs" />
     <Compile Include="Models\FileHandler.cs" />
+    <Compile Include="Models\Node\FileSystemNode.cs" />
+    <Compile Include="Models\ViewModel\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

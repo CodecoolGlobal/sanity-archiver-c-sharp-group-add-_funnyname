@@ -3,10 +3,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SanityArchiver.DesktopUI"
+        xmlns:custom="clr-namespace:SanityArchiver.Application.Models.Node;assembly=SanityArchiver.Application"
         mc:Ignorable="d"
-        Title="Sanity Archiver" Height="450" Width="800">
-    <Grid>
-        
+        Title="Sanity Archiver"
+        Height="450"
+        Width="800">
+    <Grid Margin="10">
+        <TreeView ItemsSource="{Binding Nodes}"
+                  Name="trvFamilies">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type custom:FileSystemNode}"
+                                          ItemsSource="{Binding Nodes}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Name}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded"
+                            Value="{Binding IsExpanded, Mode=TwoWay}">
+                    </Setter>
+                </Style>
+            </TreeView.Resources>
+        </TreeView>
     </Grid>
 </Window>
