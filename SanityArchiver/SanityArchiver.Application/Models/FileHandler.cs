@@ -1,36 +1,56 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 
 namespace SanityArchiver.Application.Handler
 {
     public class FileHandler
     {
-
         public void Move(FileInfo file, string destination)
         {
-            file.MoveTo(destination);
+            string sourceFile = CreateSourcePath(file, destination);
+            string destFile = CreateDestPath(file, destination);
+            File.Copy(sourceFile, destFile, true);
+            file.Delete();
         }
 
         public void Copy(FileInfo file, string destination)
         {
-            ///this will create a copy 
+            string sourceFile = CreateSourcePath(file, destination);
+            string destFile = CreateDestPath(file, destination);
+            File.Copy(sourceFile, destFile, true);
+        }
+
+        private string CreateSourcePath(FileInfo file, string destination)
+        {
+            return Path.Combine(file.DirectoryName, file.Name);
+        }
+
+        private string CreateDestPath(FileInfo file, string destination)
+        {
+            return Path.Combine(destination, file.Name);
         }
 
         public void ChangeName(FileInfo file, string newName)
         {
-            ///this will update the file's name
+            file.MoveTo(file.Directory.FullName + "\\" + newName + Path.GetExtension(file.FullName));
         }
 
         public void ChangeExtension(FileInfo file, string extension)
         {
-            ///this will update the extension of the file
+            File.Move(file.FullName, Path.ChangeExtension(file.FullName, extension));
         }
 
         public void ModifyVisibility(FileInfo file, bool visible)
         {
-            ///this will update the visibility of the file
-        }
+            if (visible == true)
+            {
+                file.Attributes = FileAttributes.Normal;
+            }
+            else
+            {
+                file.Attributes = FileAttributes.Hidden;
+            }
 
-    }
+        }
+    }    
 }
