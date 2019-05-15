@@ -4,6 +4,8 @@ using System.ComponentModel.Design.Serialization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows;
 using System.Threading.Tasks;
 
 namespace SanityArchiver.Application.Models
@@ -14,11 +16,10 @@ namespace SanityArchiver.Application.Models
     /// </summary>
     public static class FileSeeker
     {
-        public static (FileInfo[],int) Search(string root, string pattern)
+        public static FileInfo[] Search(string root, string pattern)
         {
             var directory = new DirectoryInfo(root);
             FileInfo[] files = null;
-            int numberOfResult = 0;
             try
             {
                 files = directory.GetFiles(pattern, SearchOption.AllDirectories);
@@ -31,15 +32,7 @@ namespace SanityArchiver.Application.Models
             {
                 Console.WriteLine(e);
             }
-            try
-            {
-                numberOfResult = (int)files.Length;
-            }
-            catch (NullReferenceException e)
-            {
-                Console.WriteLine(e);
-            }
-            return (files,numberOfResult);
+            return files;
         }
     }
 }
