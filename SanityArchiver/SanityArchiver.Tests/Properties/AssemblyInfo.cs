@@ -16,6 +16,7 @@ using System.Runtime.InteropServices;
 <<<<<<< HEAD
 [assembly: Guid("fd396281-55ac-4f3a-b977-64955859160b")]
 =======
+[assembly: Guid("c076b029-d077-481c-93dd-cc7670175ba8")]
 >>>>>>> Development
 
 // [assembly: AssemblyVersion("1.0.*")]
