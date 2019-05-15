@@ -1,12 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SanityArchiver.Application.Models;
 
 namespace SanityArchiver.Tests
 {
     /// <summary>
-    /// 
+    /// Test for FileSeeker.Search method
     /// </summary>
     [TestClass]
     public class FileSeekerTest
@@ -27,7 +26,7 @@ namespace SanityArchiver.Tests
             string path = @"C:\Users\sfarkas\Desktop";
             string fileName = "Loops.cs";
             var result = FileSeeker.Search(path, fileName);
-            Assert.IsNotNull(result.Item2);
+            Assert.IsNotNull(result);
         }
     }
 }

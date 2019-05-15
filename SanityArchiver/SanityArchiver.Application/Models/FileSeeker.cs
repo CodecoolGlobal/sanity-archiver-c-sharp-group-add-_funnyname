@@ -16,6 +16,7 @@ namespace SanityArchiver.Application.Models
     /// </summary>
     public static class FileSeeker
     {
+        /// <inheritdoc/>
         public static FileInfo[] Search(string root, string pattern)
         {
             var directory = new DirectoryInfo(root);
@@ -32,6 +33,7 @@ namespace SanityArchiver.Application.Models
             {
                 Console.WriteLine(e);
             }
+
             return files;
         }
     }
