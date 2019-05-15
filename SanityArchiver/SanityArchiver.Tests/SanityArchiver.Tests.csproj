@@ -5,7 +5,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+<<<<<<< HEAD
     <ProjectGuid>{FD396281-55AC-4F3A-B977-64955859160B}</ProjectGuid>
+=======
+>>>>>>> Development
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SanityArchiver.Tests</RootNamespace>
@@ -49,7 +52,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="FileSeekerTest.cs" />
+=======
+>>>>>>> Development
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
