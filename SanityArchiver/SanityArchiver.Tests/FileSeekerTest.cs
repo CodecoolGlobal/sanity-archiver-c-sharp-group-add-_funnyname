@@ -5,6 +5,9 @@ using SanityArchiver.Application.Models;
 
 namespace SanityArchiver.Tests
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [TestClass]
     public class FileSeekerTest
     {
@@ -15,7 +18,7 @@ namespace SanityArchiver.Tests
             string fileName = "Loops.cs";
             FileInfo[] files = new DirectoryInfo(path).GetFiles(fileName);
             var result = FileSeeker.Search(path, fileName);
-            Assert.IsTrue(files.Length == result.Item1.Length);
+            Assert.IsTrue(files.Length == result.Length);
         }
 
         [TestMethod]
