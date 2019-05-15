@@ -10,14 +10,22 @@ namespace SanityArchiver.Tests
     [TestClass]
     public class FileSeekerTest
     {
+        private FileSeeker _fileSeeker;
+
+        [TestInitialize]
+        public void initTest()
+        {
+            _fileSeeker = new FileSeeker();
+        }
+
         [TestMethod]
         public void GetFileForSearch()
         {
             string path = @"C:\Users\sfarkas\Desktop\CSharp_Udemy";
             string fileName = "Loops.cs";
             FileInfo[] files = new DirectoryInfo(path).GetFiles(fileName);
-            var result = FileSeeker.Search(path, fileName);
-            Assert.IsTrue(files.Length == result.Length);
+            var result = _fileSeeker.Search(path, fileName);
+            Assert.IsTrue(result.Equals(files));
         }
 
         [TestMethod]
@@ -25,7 +33,7 @@ namespace SanityArchiver.Tests
         {
             string path = @"C:\Users\sfarkas\Desktop";
             string fileName = "Loops.cs";
-            var result = FileSeeker.Search(path, fileName);
+            var result = _fileSeeker.Search(path,fileName);
             Assert.IsNotNull(result);
         }
     }

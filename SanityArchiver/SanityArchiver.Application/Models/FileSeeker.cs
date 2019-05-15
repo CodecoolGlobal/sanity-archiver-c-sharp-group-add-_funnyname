@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows;
-using System.Threading.Tasks;
 
 namespace SanityArchiver.Application.Models
 {
@@ -14,27 +8,53 @@ namespace SanityArchiver.Application.Models
     /// Search among the files whit a given directory path and pattern.
     /// The search is recursive in the selected folder.
     /// </summary>
-    public static class FileSeeker
+    public class FileSeeker
     {
         /// <inheritdoc/>
-        public static FileInfo[] Search(string root, string pattern)
+        public List<FileInfo> Search(string filePath, string fileName)
         {
-            var directory = new DirectoryInfo(root);
+            var directory = new DirectoryInfo(filePath);
+            var foundedFiles = SearchFile(directory, fileName);
+            return foundedFiles;
+        }
+
+        /// <inheritdoc/>
+        private List<FileInfo> SearchFile(DirectoryInfo rootDir, string fileName)
+        {
+            var foundedFiles = new List<FileInfo>();
+            RecursiveTraversing(rootDir, fileName, foundedFiles);
+            return foundedFiles;
+        }
+
+        /// <inheritdoc/>
+        private void RecursiveTraversing(DirectoryInfo directoryInfo, string fileName, List<FileInfo> foundedFiles)
+        {
             FileInfo[] files = null;
             try
             {
-                files = directory.GetFiles(pattern, SearchOption.AllDirectories);
-            }
-            catch (DirectoryNotFoundException e)
-            {
-                Console.WriteLine(e);
+                files = directoryInfo.GetFiles(fileName);
             }
             catch (UnauthorizedAccessException e)
             {
                 Console.WriteLine(e);
             }
+            catch (DirectoryNotFoundException e)
+            {
+                Console.WriteLine(e);
+            }
 
-            return files;
+            if (files != null)
+            {
+                foreach (var fileInfo in files)
+                {
+                    foundedFiles.Add(fileInfo);
+                }
+
+                foreach (var subDir in directoryInfo.GetDirectories())
+                {
+                    RecursiveTraversing(subDir, fileName, foundedFiles);
+                }
+            }
         }
     }
 }
