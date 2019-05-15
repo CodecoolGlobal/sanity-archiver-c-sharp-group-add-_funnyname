@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.202
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanityArchiver.DesktopUI", "SanityArchiver.DesktopUI\SanityArchiver.DesktopUI.csproj", "{FCF61A1C-6A39-4BA4-BE07-9BDF5F80A704}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanityArchiver.Application", "SanityArchiver.Application\SanityArchiver.Application.csproj", "{D78BFB25-5907-4FA2-87A7-806A7831EFD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanityArchiver.Tests", "SanityArchiver.Tests\SanityArchiver.Tests.csproj", "{807D6648-28A7-435F-8377-72A40FD8F08D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanityArchiver.Tests", "SanityArchiver.Tests\SanityArchiver.Tests.csproj", "{C076B029-D077-481C-93DD-CC7670175BA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{117BD8C5-A06D-49C9-9ABF-BBF0D9924866}"
+	ProjectSection(SolutionItems) = preProject
+		Codecool.ruleset = Codecool.ruleset
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +28,10 @@ Global
 		{D78BFB25-5907-4FA2-87A7-806A7831EFD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D78BFB25-5907-4FA2-87A7-806A7831EFD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D78BFB25-5907-4FA2-87A7-806A7831EFD2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{807D6648-28A7-435F-8377-72A40FD8F08D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{807D6648-28A7-435F-8377-72A40FD8F08D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{807D6648-28A7-435F-8377-72A40FD8F08D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{807D6648-28A7-435F-8377-72A40FD8F08D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C076B029-D077-481C-93DD-CC7670175BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C076B029-D077-481C-93DD-CC7670175BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C076B029-D077-481C-93DD-CC7670175BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C076B029-D077-481C-93DD-CC7670175BA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
