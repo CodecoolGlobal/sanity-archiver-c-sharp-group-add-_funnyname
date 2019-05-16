@@ -14,8 +14,6 @@ namespace SanityArchiver.DesktopUI.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        private delegate void HandlerDelegate(FileInfo file, string paramString);
-
         private readonly MainViewModel _vm = new MainViewModel();
         private List<FileInfo> _clipBoard = new List<FileInfo>();
         private HandlerDelegate _handlerDelegate;
@@ -28,6 +26,8 @@ namespace SanityArchiver.DesktopUI.Views
             InitializeComponent();
             DataContext = _vm;
         }
+
+        private delegate void HandlerDelegate(FileInfo file, string paramString);
 
         /// <summary>
         /// jshbfjsdhbfsdjhfsbdhjfdsbjhs
@@ -63,7 +63,7 @@ namespace SanityArchiver.DesktopUI.Views
         /// <param name="e">Events</param>
         private void BtnCopy_Click(object sender, RoutedEventArgs e)
         {
-            _handlerDelegate = FileHandler.
+            _handlerDelegate = FileHandler.Copy;
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace SanityArchiver.DesktopUI.Views
         /// <param name="e">Events</param>
         private void BtnMove_Click(object sender, RoutedEventArgs e)
         {
-            ///do stuff
+            _handlerDelegate = FileHandler.Move;
         }
 
         /// <summary>

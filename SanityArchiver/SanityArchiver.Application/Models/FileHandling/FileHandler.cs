@@ -5,14 +5,14 @@ namespace SanityArchiver.Application.Models.FileHandling
     /// <summary>
     /// This class handles 5 operations on FileInfo objects. Move, Copy, Rename, Change extension, Change sisibility.
     /// </summary>
-    public class FileHandler
+    public static class FileHandler
     {
         /// <summary>
         /// Moves FileInfo object to the destination directory (entered as a string). Uses the File.Copy method then deletes the original file.
         /// </summary>
         /// <param name="file">FileInfo</param>
         /// <param name="destination">string</param>
-        public void Move(FileInfo file, string destination)
+        public static void Move(FileInfo file, string destination)
         {
             string sourceFile = CreateSourcePath(file, destination);
             string destFile = CreateDestPath(file, destination);
@@ -26,7 +26,7 @@ namespace SanityArchiver.Application.Models.FileHandling
         /// </summary>
         /// <param name="file">FileInfo</param>
         /// <param name="destination">string</param>
-        public void Copy(FileInfo file, string destination)
+        public static void Copy(FileInfo file, string destination)
         {
             string sourceFile = CreateSourcePath(file, destination);
             string destFile = CreateDestPath(file, destination);
@@ -39,7 +39,7 @@ namespace SanityArchiver.Application.Models.FileHandling
         /// </summary>
         /// <param name="file">FileInfo</param>
         /// <param name="newName">string</param>
-        public void ChangeName(FileInfo file, string newName)
+        public static void ChangeName(FileInfo file, string newName)
         {
             file.MoveTo(file.Directory.FullName + "\\" + newName + Path.GetExtension(file.FullName));
         }
@@ -49,7 +49,7 @@ namespace SanityArchiver.Application.Models.FileHandling
         /// </summary>
         /// <param name="file">FileInfo</param>
         /// <param name="extension">string</param>
-        public void ChangeExtension(FileInfo file, string extension)
+        public static void ChangeExtension(FileInfo file, string extension)
         {
             File.Move(file.FullName, Path.ChangeExtension(file.FullName, extension));
         }
@@ -59,7 +59,7 @@ namespace SanityArchiver.Application.Models.FileHandling
         /// </summary>
         /// <param name="file">FileInfo</param>
         /// <param name="visible">boolean</param>
-        public void ModifyVisibility(FileInfo file, bool visible)
+        public static void ModifyVisibility(FileInfo file, bool visible)
         {
             if (visible == true)
             {
@@ -71,12 +71,12 @@ namespace SanityArchiver.Application.Models.FileHandling
             }
         }
 
-        private string CreateSourcePath(FileInfo file, string destination)
+        private static string CreateSourcePath(FileInfo file, string destination)
         {
             return Path.Combine(file.DirectoryName, file.Name);
         }
 
-        private string CreateDestPath(FileInfo file, string destination)
+        private static string CreateDestPath(FileInfo file, string destination)
         {
             return Path.Combine(destination, file.Name);
         }
