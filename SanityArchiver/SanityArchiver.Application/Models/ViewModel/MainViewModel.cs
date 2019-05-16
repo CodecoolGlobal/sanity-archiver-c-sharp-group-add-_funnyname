@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Collections.ObjectModel;
 using SanityArchiver.Application.Models.Node;
@@ -24,10 +20,15 @@ namespace SanityArchiver.Application.Models.ViewModel
             {
                 var root = new DirectoryInfo(drive);
                 var rootNode = new FileSystemNode(root);
-                rootNode.LoadSubDirs();
+                rootNode.LoadContent();
                 Nodes.Add(rootNode);
             }
         }
+
+        /// <summary>
+        /// Gets or sets dsdfsddfdsf
+        /// </summary>
+        public ObservableCollection<FileInfo> Files { get; set; } = new ObservableCollection<FileInfo>();
 
         /// <summary>
         /// Gets

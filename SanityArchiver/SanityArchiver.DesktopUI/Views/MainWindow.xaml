@@ -3,16 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:custom="clr-namespace:SanityArchiver.Application.Models.Node;assembly=SanityArchiver.Application"
+        xmlns:node="clr-namespace:SanityArchiver.Application.Models.Node;assembly=SanityArchiver.Application"
+        xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Sanity Archiver"
         Height="450"
         Width="800">
     <Grid Margin="10">
         <TreeView ItemsSource="{Binding Nodes}"
-                  Name="trvFamilies">
+                  x:Name="TreeView" Margin="0,0,525.6,0" SelectedItemChanged="TreeView_SelectedItemChanged">
             <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type custom:FileSystemNode}"
+                <HierarchicalDataTemplate DataType="{x:Type node:FileSystemNode}"
                                           ItemsSource="{Binding Nodes}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=Name}" />
@@ -25,5 +26,41 @@
                 </Style>
             </TreeView.Resources>
         </TreeView>
+        <TextBlock HorizontalAlignment="Left" Margin="510,187,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <DataGrid x:Name="DataGrid1"  AutoGenerateColumns="False" Margin="253,0,-0.4,0">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="Select">
+                </DataGridCheckBoxColumn>
+                <DataGridTemplateColumn Header="File Name" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type io:FileInfo}">
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="File size" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type io:FileInfo}">
+                            <TextBlock Text="{Binding Length}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Creation Date"  IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type io:FileInfo}">
+                            <TextBlock Text="{Binding CreationTime}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="LastWriteTime"  IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type io:FileInfo}">
+                            <TextBlock Text="{Binding LastWriteTime}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="689,381,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Window>
