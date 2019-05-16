@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Collections.ObjectModel;
 using SanityArchiver.Application.Models.Node;
+using SanityArchiver.Application.Models.Search;
 
 namespace SanityArchiver.Application.Models.ViewModel
 {
@@ -10,6 +12,8 @@ namespace SanityArchiver.Application.Models.ViewModel
     /// </summary>
     public class MainViewModel
     {
+        private FileSeeker _fileSeeker = new FileSeeker();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel"/> class.
         /// It loads the nodes that are representing the root directory of the logical drives
@@ -34,5 +38,16 @@ namespace SanityArchiver.Application.Models.ViewModel
         /// Gets the Nodes that are representing the subDirectory
         /// </summary>
         public ObservableCollection<FileSystemNode> Nodes { get; } = new ObservableCollection<FileSystemNode>();
+
+        /// <summary>
+        /// Search for the files that are matching with the given pattern, in the given root directory (recursive search)
+        /// </summary>
+        /// <param name="rootDir">Root directory for the recursive search</param>
+        /// <param name="pattern">pattern to search for</param>
+        /// <returns>A list of FileInfo objects with the search results</returns>
+        public List<FileInfo> SearchFile(DirectoryInfo rootDir, string pattern)
+        {
+            return _fileSeeker.Search(rootDir, pattern);
+        }
     }
 }

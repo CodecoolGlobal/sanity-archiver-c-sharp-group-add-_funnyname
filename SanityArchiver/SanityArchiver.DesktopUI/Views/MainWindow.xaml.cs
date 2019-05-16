@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -57,6 +58,22 @@ namespace SanityArchiver.DesktopUI.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            var rootDir = _actualDir;
+            var pattern = SearchBox.Text;
+            var searchResults = new ObservableCollection<FileInfo>();
+            var results = _vm.SearchFile(rootDir, pattern);
+            foreach (var result in results)
+            {
+                searchResults.Add(result);
+            }
+
+            DataGrid1.ItemsSource = searchResults;
+            SearchBox.Text = "Search";
+        }
+
+        private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            SearchBox.Text = string.Empty;
         }
     }
 }
