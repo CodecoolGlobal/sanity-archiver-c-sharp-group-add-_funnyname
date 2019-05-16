@@ -17,6 +17,7 @@ namespace SanityArchiver.DesktopUI.Views
         private readonly MainViewModel _vm = new MainViewModel();
         private List<FileInfo> _clipBoard = new List<FileInfo>();
         private HandlerDelegate _handlerDelegate;
+        private DirectoryInfo _actualDir;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -38,6 +39,8 @@ namespace SanityArchiver.DesktopUI.Views
         {
             var node = (FileSystemNode)e.NewValue;
             DataGrid1.ItemsSource = node.Files;
+            _actualDir = node.Dir;
+            dirLabel.Content = $"Selected directory: {_actualDir.FullName}";
         }
 
         /// <summary>
