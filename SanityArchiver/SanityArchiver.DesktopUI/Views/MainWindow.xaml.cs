@@ -37,11 +37,9 @@ namespace SanityArchiver.DesktopUI.Views
         }
 
         /// <summary>
-        /// dfjsdnfksfskjfskjfnfkjsdfkjnsfkjsd
+        /// ewereklrerktnkjtrjktnerjrekjtekt
         /// </summary>
-        /// <param name="sender">sdjfkjskfnsdkfsnfs</param>
-        /// <param name="e">fksjdfnjsdsdjkfndjksdjfk</param>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void GetSelectedFiles()
         {
             _clipBoard.Clear();
             foreach (var item in DataGrid1.Items)

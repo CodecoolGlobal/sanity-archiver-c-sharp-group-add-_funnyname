@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace SanityArchiver.Application.Models
+namespace SanityArchiver.Application.Models.Search
 {
     /// <summary>
     /// Search among the files whit a given directory path and pattern.

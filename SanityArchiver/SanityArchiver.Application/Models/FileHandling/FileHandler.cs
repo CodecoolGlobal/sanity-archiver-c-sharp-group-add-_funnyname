@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace SanityArchiver.Application.Models
+namespace SanityArchiver.Application.Models.FileHandling
 {
     /// <summary>
     /// This class handles 5 operations on FileInfo objects. Move, Copy, Rename, Change extension, Change sisibility.

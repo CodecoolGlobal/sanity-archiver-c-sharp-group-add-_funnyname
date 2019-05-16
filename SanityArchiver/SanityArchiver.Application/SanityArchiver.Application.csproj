@@ -49,9 +49,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\FileSeeker.cs" />
+    <Compile Include="Models\Search\FileSeeker.cs" />
     <Compile Include="Models\Archiver\FileArchiver.cs" />
-    <Compile Include="Models\FileHandler.cs" />
+    <Compile Include="Models\FileHandling\FileHandler.cs" />
     <Compile Include="Models\Node\FileSystemNode.cs" />
     <Compile Include="Models\ViewModel\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
