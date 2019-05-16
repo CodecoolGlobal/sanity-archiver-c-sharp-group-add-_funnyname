@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Sanity Archiver"
         Height="450"
-        Width="800">
+        Width="1246.533">
     <Grid Margin="10">
         <TreeView ItemsSource="{Binding Nodes}"
                   x:Name="TreeView" Margin="0,0,525.6,0" SelectedItemChanged="TreeView_SelectedItemChanged">
@@ -59,9 +59,16 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Path"  IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type io:FileInfo}">
+                            <TextBlock Text="{Binding FullName}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Dummy" HorizontalAlignment="Left" Margin="689,381,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Copy" HorizontalAlignment="Left" Margin="253,0,0,0" VerticalAlignment="Top" Width="75" />
         <Button Content="Move" HorizontalAlignment="Left" Margin="333,0,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Delete" HorizontalAlignment="Left" Margin="413,0,0,0" VerticalAlignment="Top" Width="75"/>

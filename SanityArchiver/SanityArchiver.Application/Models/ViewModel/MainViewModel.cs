@@ -6,13 +6,13 @@ using SanityArchiver.Application.Models.Node;
 namespace SanityArchiver.Application.Models.ViewModel
 {
     /// <summary>
-    /// sdkjfnsdkfnsdjkfndskjfsdkjdnfsk
+    /// The main aggregator class that connects the model classes with the UI
     /// </summary>
     public class MainViewModel
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel"/> class.
-        /// dffsdfsdknknjfkjskfnsdkjsdnfksdnf
+        /// It loads the nodes that are representing the root directory of the logical drives
         /// </summary>
         public MainViewModel()
         {
@@ -26,24 +26,13 @@ namespace SanityArchiver.Application.Models.ViewModel
         }
 
         /// <summary>
-        /// Gets or sets dsdfsddfdsf
+        /// Gets or sets the files contained by the actual node (directory)
         /// </summary>
         public ObservableCollection<FileInfo> Files { get; set; } = new ObservableCollection<FileInfo>();
 
         /// <summary>
-        /// Gets
+        /// Gets the Nodes that are representing the subDirectory
         /// </summary>
         public ObservableCollection<FileSystemNode> Nodes { get; } = new ObservableCollection<FileSystemNode>();
-
-        /// <summary>
-        /// ksjdfdjksfdsjknfdsjkfnsjkfsdnfjk
-        /// </summary>
-        public void Print()
-        {
-            foreach (var node in Nodes)
-            {
-                Console.WriteLine(node);
-            }
-        }
     }
 }
