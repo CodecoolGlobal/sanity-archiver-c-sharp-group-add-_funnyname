@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using SanityArchiver.Application.Models.ViewModel;
 using SanityArchiver.Application.Models.Node;
+using SanityArchiver.Application.Models.FileHandling;
 
 namespace SanityArchiver.DesktopUI.Views
 {
@@ -13,8 +14,11 @@ namespace SanityArchiver.DesktopUI.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        private delegate void HandlerDelegate(FileInfo file, string paramString);
+
         private readonly MainViewModel _vm = new MainViewModel();
         private List<FileInfo> _clipBoard = new List<FileInfo>();
+        private HandlerDelegate _handlerDelegate;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -59,7 +63,7 @@ namespace SanityArchiver.DesktopUI.Views
         /// <param name="e">Events</param>
         private void BtnCopy_Click(object sender, RoutedEventArgs e)
         {
-            ///do stuff
+            _handlerDelegate = FileHandler.
         }
 
         /// <summary>

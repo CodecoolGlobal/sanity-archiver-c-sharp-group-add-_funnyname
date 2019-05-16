@@ -62,9 +62,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Dummy" HorizontalAlignment="Left" Margin="689,381,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Copy" HorizontalAlignment="Left" Margin="253,0,0,0" VerticalAlignment="Top" Width="75" />
-        <Button Content="Move" HorizontalAlignment="Left" Margin="333,0,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="413,0,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnCopy" Content="Copy" HorizontalAlignment="Left" Margin="253,0,0,0" VerticalAlignment="Top" Width="75" Click="BtnCopy_Click" />
+        <Button x:Name="btnMove" Content="Move" HorizontalAlignment="Left" Margin="333,0,0,0" VerticalAlignment="Top" Width="75" Click="BtnMove_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="413,0,0,0" VerticalAlignment="Top" Width="75" Click="BtnDelete_Click"/>
         <Button Content="Compress" HorizontalAlignment="Left" Margin="493,0,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBox HorizontalAlignment="Left" Height="18" Margin="611,0,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="120"/>
         <Button Content="Go" HorizontalAlignment="Left" Margin="736,0,0,0" VerticalAlignment="Top" Width="35" Height="18"/>
