@@ -73,17 +73,6 @@ namespace SanityArchiver.DesktopUI.Views
             btnPaste.IsEnabled = true;
             GetSelectedFiles();
             _vm.SetDelegateToCopy();
-            var rootDir = _actualDir;
-            var pattern = SearchBox.Text;
-            var searchResults = new ObservableCollection<FileInfo>();
-            var results = _vm.SearchFile(rootDir, pattern);
-            foreach (var result in results)
-            {
-                searchResults.Add(result);
-            }
-
-            DataGrid1.ItemsSource = searchResults;
-            SearchBox.Text = "Search";
         }
 
         /// <summary>
@@ -107,6 +96,7 @@ namespace SanityArchiver.DesktopUI.Views
         {
             GetSelectedFiles();
             _vm.DeleteFiles(_clipBoard);
+            _actualNode.LoadContent();
         }
 
         private void BtnPaste_Click(object sender, RoutedEventArgs e)
@@ -114,6 +104,7 @@ namespace SanityArchiver.DesktopUI.Views
             foreach (FileInfo file in _clipBoard)
             {
                 _vm.HandleFileAction(file, _actualDir);
+                _actualNode.LoadContent();
             }
         }
 
@@ -122,7 +113,22 @@ namespace SanityArchiver.DesktopUI.Views
             SearchBox.Text = string.Empty;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var rootDir = _actualDir;
+            var pattern = SearchBox.Text;
+            var searchResults = new ObservableCollection<FileInfo>();
+            var results = _vm.SearchFile(rootDir, pattern);
+            foreach (var result in results)
+            {
+                searchResults.Add(result);
+            }
+
+            DataGrid1.ItemsSource = searchResults;
+            SearchBox.Text = "Search";
+        }
+
+        private void CompressBtn_Click(object sender, RoutedEventArgs e)
         {
             GetSelectedFiles();
             _vm.CompressFiles(_clipBoard, _actualDir);

@@ -107,11 +107,11 @@
                 VerticalAlignment="Top"
                 Width="75"
                 Click="BtnDelete_Click"/>
-        <Button Content="Compress"
+        <Button x:Name="CompressBtn" Content="Compress"
                 HorizontalAlignment="Left"
                 Margin="493,0,0,0"
                 VerticalAlignment="Top"
-                Width="75" />
+                Width="75" Click="CompressBtn_Click" />
         <TextBox x:Name="SearchBox"
                  HorizontalAlignment="Left"
                  Height="18"
@@ -120,7 +120,7 @@
                  Text="Search"
                  VerticalAlignment="Top"
                  Width="120"
-                 Grid.Column="1" />
+                 Grid.Column="1" GotFocus="SearchBox_GotFocus" />
         <Button Content="Go"
                 HorizontalAlignment="Left"
                 Margin="498,1,0,0"
