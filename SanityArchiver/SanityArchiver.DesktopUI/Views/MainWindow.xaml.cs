@@ -51,5 +51,37 @@ namespace SanityArchiver.DesktopUI.Views
                 }
             }
         }
+
+        /// <summary>
+        /// Event handler for copy button. Copies the selected file(s) to another directory.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Events</param>
+        private void BtnCopy_Click(object sender, RoutedEventArgs e)
+        {
+            ///do stuff
+        }
+
+        /// <summary>
+        /// Event handler for move button. Moves selected file(s) to another directory.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Events</param>
+        private void BtnMove_Click(object sender, RoutedEventArgs e)
+        {
+            ///do stuff
+        }
+
+        /// <summary>
+        /// Event handler for delete button. Deletes selected file(s).
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Events</param>
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ///do stuff
+            ///
+            var stuff = 0;
+        }
     }
 }
