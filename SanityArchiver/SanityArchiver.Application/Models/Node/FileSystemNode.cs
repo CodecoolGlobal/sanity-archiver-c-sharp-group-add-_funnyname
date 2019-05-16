@@ -13,6 +13,7 @@ namespace SanityArchiver.Application.Models.Node
     {
         private bool _isExpanded;
         private FileSystemWatcher _watcher;
+        private DispatcherTimer _timer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileSystemNode"/> class.
@@ -66,13 +67,31 @@ namespace SanityArchiver.Application.Models.Node
                 _isExpanded = value;
                 if (_isExpanded)
                 {
-                    CreateWatcher();
                     foreach (var node in Nodes)
                     {
                         node.LoadContent();
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Start a timer to refresh the node content periodically.
+        /// </summary>
+        public void StartTimer()
+        {
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Tick += (sender, args) => LoadContent();
+            _timer.Start();
+        }
+
+        /// <summary>
+        /// Stop a timer of the node.
+        /// </summary>
+        public void StopStimer()
+        {
+            _timer.Stop();
         }
 
         /// <summary>
@@ -85,19 +104,11 @@ namespace SanityArchiver.Application.Models.Node
         }
 
         /// <summary>
-        /// fjdbsfjdbfjbdjhfbdjfhsbdfjhdsbfsjdf
-        /// </summary>
-        public void RefreshContent()
-        {
-            LoadFiles();
-            LoadSubDirs();
-        }
-
-        /// <summary>
         /// sbfbfkjfskfjbkjfdfjkbdsjkf
         /// </summary>
         public void LoadSubDirs()
         {
+            Nodes.Clear();
             try
             {
                 foreach (var subDir in Dir.GetDirectories())
@@ -120,6 +131,7 @@ namespace SanityArchiver.Application.Models.Node
         /// </summary>
         public void LoadFiles()
         {
+            Files.Clear();
             try
             {
                 foreach (var file in Dir.GetFiles())
@@ -135,48 +147,6 @@ namespace SanityArchiver.Application.Models.Node
             {
                 Console.WriteLine(exception.Message);
             }
-        }
-
-        /// <summary>
-        /// dsfjnsdjkfdsnkfndsfkdsjnfjsdkf
-        /// </summary>
-        /// <returns>string </returns>
-        public override string ToString()
-        {
-            return Name;
-        }
-
-        /// <summary>
-        /// dsbfsdjfsdfjbfjdshbfjsdjfhbfjshbfsdjf
-        /// </summary>
-        private void CreateWatcher()
-        {
-            _watcher = new FileSystemWatcher
-            {
-                Path = Dir.FullName,
-                NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastAccess | NotifyFilters.LastWrite,
-            };
-            _watcher.Changed += OnContentChange;
-            _watcher.Created += OnContentChange;
-            _watcher.Deleted += OnContentChange;
-            _watcher.Renamed += OnContentChange;
-            try
-            {
-                _watcher.EnableRaisingEvents = true;
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        /// <summary>
-        /// sdhbfjshbfdsjhfbdsjfbdjfbdfjfbjfbjsjfsbdfjfjfh
-        /// </summary>
-        /// <param name="source">sfjksdnfkdjnfdkjnfkfdskfjfkjfnds</param>
-        /// <param name="fileEvent">sfksnfjnfkdsfkjfndkf</param>
-        private void OnContentChange(object source, FileSystemEventArgs fileEvent)
-        {
-            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(Files);
         }
     }
 }

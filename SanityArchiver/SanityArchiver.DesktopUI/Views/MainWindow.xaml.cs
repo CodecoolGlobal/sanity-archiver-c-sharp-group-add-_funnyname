@@ -34,8 +34,10 @@ namespace SanityArchiver.DesktopUI.Views
         /// <param name="e">dsfdfdfdsfsfs</param>
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            ((FileSystemNode)e.OldValue)?.StopStimer();
             var node = (FileSystemNode)e.NewValue;
             DataGrid1.ItemsSource = node.Files;
+            node.StartTimer();
             _actualDir = node.Dir;
             dirLabel.Content = $"Selected directory: {_actualDir.FullName}";
         }
