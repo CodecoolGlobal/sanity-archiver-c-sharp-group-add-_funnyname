@@ -10,28 +10,31 @@ namespace SanityArchiver.Application.Models.Search
     /// </summary>
     public class FileSeeker
     {
-        /// <inheritdoc/>
-        public List<FileInfo> Search(DirectoryInfo rootDir, string fileName)
-        {
-            var foundedFiles = SearchFile(rootDir, fileName);
-            return foundedFiles;
-        }
-
-        /// <inheritdoc/>
-        private List<FileInfo> SearchFile(DirectoryInfo rootDir, string pattern)
+        /// <summary>
+        /// Executes the recursive, patterned based file search
+        /// </summary>
+        /// <param name="rootDir">DirectoryInfo object that represents the rootDir directory for the search</param>
+        /// <param name="pattern">The wildcard based pattern for the search</param>
+        /// <returns>List<FileInfo> object that contains the search results</returns>
+        public List<FileInfo> Search(DirectoryInfo rootDir, string pattern)
         {
             var foundedFiles = new List<FileInfo>();
             RecursiveTraversing(rootDir, pattern, foundedFiles);
             return foundedFiles;
         }
 
-        /// <inheritdoc/>
-        private void RecursiveTraversing(DirectoryInfo directoryInfo, string pattern, List<FileInfo> foundedFiles)
+       /// <summary>
+       /// Recursive search engine
+       /// </summary>
+       /// <param name="rootDir">Root Directory of the recursive search</param>
+       /// <param name="pattern">Filename pattern of the search</param>
+       /// <param name="foundedFiles">The list that will be populated with the search results</param>
+        private void RecursiveTraversing(DirectoryInfo rootDir, string pattern, List<FileInfo> foundedFiles)
         {
             FileInfo[] files = null;
             try
             {
-                files = directoryInfo.GetFiles(pattern);
+                files = rootDir.GetFiles(pattern);
             }
             catch (UnauthorizedAccessException e)
             {
@@ -49,7 +52,7 @@ namespace SanityArchiver.Application.Models.Search
                     foundedFiles.Add(fileInfo);
                 }
 
-                foreach (var subDir in directoryInfo.GetDirectories())
+                foreach (var subDir in rootDir.GetDirectories())
                 {
                     RecursiveTraversing(subDir, pattern, foundedFiles);
                 }

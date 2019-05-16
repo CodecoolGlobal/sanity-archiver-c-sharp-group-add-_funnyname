@@ -29,10 +29,10 @@ namespace SanityArchiver.DesktopUI.Views
         }
 
         /// <summary>
-        /// jshbfjsdhbfsdjhfsbdhjfdsbjhs
+        /// What happens when a TreeViewItem gets focus (clicked on)
         /// </summary>
-        /// <param name="sender">dfdsfsfdsfsf</param>
-        /// <param name="e">dsfdfdfdsfsfs</param>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             // ((FileSystemNode)e.OldValue)?.StopStimer();
@@ -47,7 +47,7 @@ namespace SanityArchiver.DesktopUI.Views
         }
 
         /// <summary>
-        /// ewereklrerktnkjtrjktnerjrekjtekt
+        /// Logic for getting the selected files from the DataGrid
         /// </summary>
         private void GetSelectedFiles()
         {
@@ -82,7 +82,7 @@ namespace SanityArchiver.DesktopUI.Views
             SearchBox.Text = string.Empty;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void CompressBtn_click(object sender, RoutedEventArgs e)
         {
             GetSelectedFiles();
             _vm.CompressFiles(_clipBoard, _actualDir);

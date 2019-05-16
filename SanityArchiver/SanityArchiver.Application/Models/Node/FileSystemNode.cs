@@ -1,63 +1,52 @@
 ﻿using System;
-using System.Windows.Threading;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Windows.Data;
 
 namespace SanityArchiver.Application.Models.Node
 {
     /// <summary>
-    /// PizDjec
+    /// The instances of this class are representing the directories of the TreeView
     /// </summary>
     public class FileSystemNode
     {
         private bool _isExpanded;
-        private FileSystemWatcher _watcher;
-        private DispatcherTimer _timer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileSystemNode"/> class.
-        /// Its a fooken constructor, m8
         /// </summary>
-        /// <param name="dir">suk a diiiiiikkkkkk</param>
+        /// <param name="dir">DirectoryInfo object, the directory of this node</param>
         public FileSystemNode(DirectoryInfo dir)
         {
             Dir = dir;
         }
 
         /// <summary>
-        /// Gets the shit out of you
+        /// Gets the DirectoryInfo object of the node
         /// </summary>
         public DirectoryInfo Dir { get; }
 
         /// <summary>
-        /// Gets
+        /// Gets the nem of the directory
         /// </summary>
-        public string Name
-        {
-            get => Dir.Name;
-        }
+        public string Name => Dir.Name;
 
         /// <summary>
-        /// Gets
+        /// Gets the full path of the directory
         /// </summary>
-        public string Path
-        {
-            get => Dir.FullName;
-        }
+        public string Path => Dir.FullName;
 
         /// <summary>
-        /// Gets Kheci!
+        /// Gets the the collection of the nodes that represent the subdirectories
         /// </summary>
         public ObservableCollection<FileSystemNode> Nodes { get; } = new ObservableCollection<FileSystemNode>();
 
         /// <summary>
-        /// Gets Kheci2
+        /// Gets the collection of the files within the node (this directory)
         /// </summary>
         public ObservableCollection<FileInfo> Files { get; } = new ObservableCollection<FileInfo>();
 
         /// <summary>
-        /// Gets or sets a value indicating whether.
+        /// Gets or sets a value indicating whether the TreeViewItem (that represents this node) is expanded or not.
         /// </summary>
         public bool IsExpanded
         {
@@ -76,26 +65,7 @@ namespace SanityArchiver.Application.Models.Node
         }
 
         /// <summary>
-        /// Start a timer to refresh the node content periodically.
-        /// </summary>
-        public void StartTimer()
-        {
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Tick += (sender, args) => LoadContent();
-            _timer.Start();
-        }
-
-        /// <summary>
-        /// Stop a timer of the node.
-        /// </summary>
-        public void StopStimer()
-        {
-            _timer.Stop();
-        }
-
-        /// <summary>
-        /// dfndskfdskfjdsnksjdfsndkf
+        /// Loads the subDirectories (nodes) and the contained files
         /// </summary>
         public void LoadContent()
         {
@@ -104,7 +74,7 @@ namespace SanityArchiver.Application.Models.Node
         }
 
         /// <summary>
-        /// sbfbfkjfskfjbkjfdfjkbdsjkf
+        /// Loads the subDirectories (nodes) of this node (directory)
         /// </summary>
         public void LoadSubDirs()
         {
@@ -127,7 +97,7 @@ namespace SanityArchiver.Application.Models.Node
         }
 
         /// <summary>
-        /// dfdfsdfsdfdfdsfdsfdsffsfsf
+        /// Loads the files contained by this node (directory)
         /// </summary>
         public void LoadFiles()
         {
