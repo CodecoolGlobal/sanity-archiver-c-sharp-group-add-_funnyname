@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using SanityArchiver.Application.Models.Archiver;
 using SanityArchiver.Application.Models.Node;
 using SanityArchiver.Application.Models.Search;
+using SanityArchiver.Application.Models.FileHandling;
 
 namespace SanityArchiver.Application.Models.ViewModel
 {
@@ -15,6 +17,8 @@ namespace SanityArchiver.Application.Models.ViewModel
     {
         private FileSeeker _fileSeeker = new FileSeeker();
         private FileArchiver _fileArchiver = new FileArchiver();
+
+        private HandlerDelegate _handlerDelegate;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel"/> class.
@@ -30,6 +34,8 @@ namespace SanityArchiver.Application.Models.ViewModel
                 Nodes.Add(rootNode);
             }
         }
+
+        private delegate void HandlerDelegate(FileInfo file, DirectoryInfo dir);
 
         /// <summary>
         /// Gets or sets the files contained by the actual node (directory)
@@ -62,6 +68,44 @@ namespace SanityArchiver.Application.Models.ViewModel
             foreach (var file in files)
             {
                 _fileArchiver.Compress(file, destination);
+            }
+        }
+
+        /// <summary>
+        /// kekfgdfgfgfdgfdgfdgfdg
+        /// </summary>
+        /// <param name="file">lol</param>
+        /// <param name="dir">llol</param>
+        public void HandleFileAction(FileInfo file, DirectoryInfo dir)
+        {
+            _handlerDelegate.Invoke(file, dir);
+        }
+
+        /// <summary>
+        /// sets the class delegate function to Copy
+        /// </summary>
+        public void SetDelegateToCopy()
+        {
+            _handlerDelegate = FileHandler.Copy;
+        }
+
+        /// <summary>
+        /// sets the class delegate to move
+        /// </summary>
+        public void SetDelegateToMove()
+        {
+            _handlerDelegate = FileHandler.Move;
+        }
+
+        /// <summary>
+        /// Deletes passed files.
+        /// </summary>
+        /// <param name="clipBoard">List<FileInfo></param>
+        public void DeleteFiles(List<FileInfo> clipBoard)
+        {
+            foreach (FileInfo file in clipBoard)
+            {
+                FileHandler.DeleteFile(file);
             }
         }
     }

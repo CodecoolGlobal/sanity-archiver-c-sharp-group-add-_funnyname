@@ -26,6 +26,7 @@ namespace SanityArchiver.DesktopUI.Views
         {
             InitializeComponent();
             DataContext = _vm;
+            btnPaste.IsEnabled = false;
         }
 
         /// <summary>
@@ -62,8 +63,16 @@ namespace SanityArchiver.DesktopUI.Views
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Event handler for copy button. Copies the selected file(s) to another directory.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Events</param>
+        private void BtnCopy_Click(object sender, RoutedEventArgs e)
         {
+            btnPaste.IsEnabled = true;
+            GetSelectedFiles();
+            _vm.SetDelegateToCopy();
             var rootDir = _actualDir;
             var pattern = SearchBox.Text;
             var searchResults = new ObservableCollection<FileInfo>();
@@ -75,6 +84,37 @@ namespace SanityArchiver.DesktopUI.Views
 
             DataGrid1.ItemsSource = searchResults;
             SearchBox.Text = "Search";
+        }
+
+        /// <summary>
+        /// Event handler for move button. Moves selected file(s) to another directory.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Events</param>
+        private void BtnMove_Click(object sender, RoutedEventArgs e)
+        {
+            btnPaste.IsEnabled = true;
+            GetSelectedFiles();
+            _vm.SetDelegateToMove();
+        }
+
+        /// <summary>
+        /// Event handler for delete button. Deletes selected file(s).
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Events</param>
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            GetSelectedFiles();
+            _vm.DeleteFiles(_clipBoard);
+        }
+
+        private void BtnPaste_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (FileInfo file in _clipBoard)
+            {
+                _vm.HandleFileAction(file, _actualDir);
+            }
         }
 
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
