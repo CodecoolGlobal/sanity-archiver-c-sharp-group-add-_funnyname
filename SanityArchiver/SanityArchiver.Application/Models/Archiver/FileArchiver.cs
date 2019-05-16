@@ -17,12 +17,12 @@ namespace SanityArchiver.Application.Models.Archiver
         /// GZipStream initializes a new instance of the GZipStream class by using the specified stream and compression mode.
         /// </summary>
         /// <param name="file">This parameter is a FileInfo object.</param>
-        /// <param name="destinationPath">This parameter is a string, which is the destination path.</param>
-        public void Compress(FileInfo file, string destinationPath)
+        /// <param name="destination">This parameter is a string, which is the destination path.</param>
+        public void Compress(FileInfo file, DirectoryInfo destination)
         {
             using (var fileStream = new FileStream(file.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                using (var compressedFile = File.Create(destinationPath))
+                using (var compressedFile = File.Create(Path.Combine(destination.FullName, $"{file.Name}.gz")))
                 {
                     using (var compressionStream = new GZipStream(compressedFile, CompressionMode.Compress))
                     {

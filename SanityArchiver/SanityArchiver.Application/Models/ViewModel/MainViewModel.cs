@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Collections.ObjectModel;
+using SanityArchiver.Application.Models.Archiver;
 using SanityArchiver.Application.Models.Node;
 using SanityArchiver.Application.Models.Search;
 
@@ -13,6 +14,7 @@ namespace SanityArchiver.Application.Models.ViewModel
     public class MainViewModel
     {
         private FileSeeker _fileSeeker = new FileSeeker();
+        private FileArchiver _fileArchiver = new FileArchiver();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainViewModel"/> class.
@@ -48,6 +50,19 @@ namespace SanityArchiver.Application.Models.ViewModel
         public List<FileInfo> SearchFile(DirectoryInfo rootDir, string pattern)
         {
             return _fileSeeker.Search(rootDir, pattern);
+        }
+
+        /// <summary>
+        /// Compresses given files to a given destination.
+        /// </summary>
+        /// <param name="files">Collection</param>
+        /// <param name="destination">DirectoryInfo object</param>
+        public void CompressFiles(List<FileInfo> files, DirectoryInfo destination)
+        {
+            foreach (var file in files)
+            {
+                _fileArchiver.Compress(file, destination);
+            }
         }
     }
 }

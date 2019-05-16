@@ -17,6 +17,7 @@ namespace SanityArchiver.DesktopUI.Views
         private readonly MainViewModel _vm = new MainViewModel();
         private List<FileInfo> _clipBoard = new List<FileInfo>();
         private DirectoryInfo _actualDir;
+        private FileSystemNode _actualNode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -34,11 +35,14 @@ namespace SanityArchiver.DesktopUI.Views
         /// <param name="e">dsfdfdfdsfsfs</param>
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            ((FileSystemNode)e.OldValue)?.StopStimer();
-            var node = (FileSystemNode)e.NewValue;
-            DataGrid1.ItemsSource = node.Files;
-            node.StartTimer();
-            _actualDir = node.Dir;
+            // ((FileSystemNode)e.OldValue)?.StopStimer();
+
+            _actualNode = (FileSystemNode)e.NewValue;
+            DataGrid1.ItemsSource = _actualNode.Files;
+
+            // node.StartTimer();
+
+            _actualDir = _actualNode.Dir;
             dirLabel.Content = $"Selected directory: {_actualDir.FullName}";
         }
 
@@ -76,6 +80,13 @@ namespace SanityArchiver.DesktopUI.Views
         private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
             SearchBox.Text = string.Empty;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            GetSelectedFiles();
+            _vm.CompressFiles(_clipBoard, _actualDir);
+            _actualNode.LoadContent();
         }
     }
 }
