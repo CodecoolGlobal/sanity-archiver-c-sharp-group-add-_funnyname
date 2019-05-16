@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using SanityArchiver.Application.Models.ViewModel;
 using SanityArchiver.Application.Models.Node;
-using SanityArchiver.Application.Models.FileHandling;
 
 namespace SanityArchiver.DesktopUI.Views
 {
@@ -16,7 +15,6 @@ namespace SanityArchiver.DesktopUI.Views
     {
         private readonly MainViewModel _vm = new MainViewModel();
         private List<FileInfo> _clipBoard = new List<FileInfo>();
-        private HandlerDelegate _handlerDelegate;
         private DirectoryInfo _actualDir;
 
         /// <summary>
@@ -26,9 +24,8 @@ namespace SanityArchiver.DesktopUI.Views
         {
             InitializeComponent();
             DataContext = _vm;
+            btnPaste.IsEnabled = false;
         }
-
-        private delegate void HandlerDelegate(FileInfo file, string paramString);
 
         /// <summary>
         /// jshbfjsdhbfsdjhfsbdhjfdsbjhs
@@ -40,7 +37,7 @@ namespace SanityArchiver.DesktopUI.Views
             var node = (FileSystemNode)e.NewValue;
             DataGrid1.ItemsSource = node.Files;
             _actualDir = node.Dir;
-            dirLabel.Content = $"Selected directory: {_actualDir.FullName}";
+            dirLabel.Content = $"{_actualDir.FullName}";
         }
 
         /// <summary>
@@ -66,7 +63,9 @@ namespace SanityArchiver.DesktopUI.Views
         /// <param name="e">Events</param>
         private void BtnCopy_Click(object sender, RoutedEventArgs e)
         {
-            _handlerDelegate = FileHandler.Copy;
+            btnPaste.IsEnabled = true;
+            GetSelectedFiles();
+            _vm.SetDelegateToCopy();
         }
 
         /// <summary>
@@ -76,7 +75,9 @@ namespace SanityArchiver.DesktopUI.Views
         /// <param name="e">Events</param>
         private void BtnMove_Click(object sender, RoutedEventArgs e)
         {
-            _handlerDelegate = FileHandler.Move;
+            btnPaste.IsEnabled = true;
+            GetSelectedFiles();
+            _vm.SetDelegateToMove();
         }
 
         /// <summary>
@@ -86,9 +87,16 @@ namespace SanityArchiver.DesktopUI.Views
         /// <param name="e">Events</param>
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            ///do stuff
-            ///
-            var stuff = 0;
+            GetSelectedFiles();
+            _vm.DeleteFiles(_clipBoard);
+        }
+
+        private void BtnPaste_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (FileInfo file in _clipBoard)
+            {
+                _vm.HandleFileAction(file, _actualDir);
+            }
         }
     }
 }

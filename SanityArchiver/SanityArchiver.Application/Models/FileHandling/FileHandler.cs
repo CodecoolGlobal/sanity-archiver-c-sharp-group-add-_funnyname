@@ -12,13 +12,10 @@ namespace SanityArchiver.Application.Models.FileHandling
         /// </summary>
         /// <param name="file">FileInfo</param>
         /// <param name="destination">string</param>
-        public static void Move(FileInfo file, string destination)
+        public static void Move(FileInfo file, DirectoryInfo destination)
         {
-            string sourceFile = CreateSourcePath(file, destination);
-            string destFile = CreateDestPath(file, destination);
-
-            File.Copy(sourceFile, destFile, true);
-            file.Delete();
+            string destFile = CreateDestPath(file, destination.FullName);
+            file.MoveTo(destFile);
         }
 
         /// <summary>
@@ -26,12 +23,9 @@ namespace SanityArchiver.Application.Models.FileHandling
         /// </summary>
         /// <param name="file">FileInfo</param>
         /// <param name="destination">string</param>
-        public static void Copy(FileInfo file, string destination)
+        public static void Copy(FileInfo file, DirectoryInfo destination)
         {
-            string sourceFile = CreateSourcePath(file, destination);
-            string destFile = CreateDestPath(file, destination);
-
-            File.Copy(sourceFile, destFile, true);
+            file.CopyTo(Path.Combine(destination.FullName, file.Name));
         }
 
         /// <summary>
@@ -71,9 +65,13 @@ namespace SanityArchiver.Application.Models.FileHandling
             }
         }
 
-        private static string CreateSourcePath(FileInfo file, string destination)
+        /// <summary>
+        /// Deletes the given parameter.
+        /// </summary>
+        /// <param name="file">FileInfo object</param>
+        public static void DeleteFile(FileInfo file)
         {
-            return Path.Combine(file.DirectoryName, file.Name);
+            file.Delete();
         }
 
         private static string CreateDestPath(FileInfo file, string destination)
