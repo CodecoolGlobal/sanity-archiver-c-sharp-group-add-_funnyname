@@ -11,28 +11,27 @@ namespace SanityArchiver.Application.Models.Search
     public class FileSeeker
     {
         /// <inheritdoc/>
-        public List<FileInfo> Search(string filePath, string fileName)
+        public List<FileInfo> Search(DirectoryInfo rootDir, string fileName)
         {
-            var directory = new DirectoryInfo(filePath);
-            var foundedFiles = SearchFile(directory, fileName);
+            var foundedFiles = SearchFile(rootDir, fileName);
             return foundedFiles;
         }
 
         /// <inheritdoc/>
-        private List<FileInfo> SearchFile(DirectoryInfo rootDir, string fileName)
+        private List<FileInfo> SearchFile(DirectoryInfo rootDir, string pattern)
         {
             var foundedFiles = new List<FileInfo>();
-            RecursiveTraversing(rootDir, fileName, foundedFiles);
+            RecursiveTraversing(rootDir, pattern, foundedFiles);
             return foundedFiles;
         }
 
         /// <inheritdoc/>
-        private void RecursiveTraversing(DirectoryInfo directoryInfo, string fileName, List<FileInfo> foundedFiles)
+        private void RecursiveTraversing(DirectoryInfo directoryInfo, string pattern, List<FileInfo> foundedFiles)
         {
             FileInfo[] files = null;
             try
             {
-                files = directoryInfo.GetFiles(fileName);
+                files = directoryInfo.GetFiles(pattern);
             }
             catch (UnauthorizedAccessException e)
             {
@@ -52,7 +51,7 @@ namespace SanityArchiver.Application.Models.Search
 
                 foreach (var subDir in directoryInfo.GetDirectories())
                 {
-                    RecursiveTraversing(subDir, fileName, foundedFiles);
+                    RecursiveTraversing(subDir, pattern, foundedFiles);
                 }
             }
         }
