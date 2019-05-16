@@ -10,8 +10,12 @@
         Height="450"
         Width="1246.533">
     <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="171*"/>
+            <ColumnDefinition Width="134*"/>
+        </Grid.ColumnDefinitions>
         <TreeView ItemsSource="{Binding Nodes}"
-                  x:Name="TreeView" Margin="0,0,525.6,0" SelectedItemChanged="TreeView_SelectedItemChanged">
+                  x:Name="TreeView" Margin="0,0,436,0" SelectedItemChanged="TreeView_SelectedItemChanged">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type node:FileSystemNode}"
                                           ItemsSource="{Binding Nodes}">
@@ -27,7 +31,7 @@
             </TreeView.Resources>
         </TreeView>
         <TextBlock HorizontalAlignment="Left" Margin="510,187,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <DataGrid x:Name="DataGrid1"  AutoGenerateColumns="False" Margin="253,24,-0.4,0">
+        <DataGrid x:Name="DataGrid1"  AutoGenerateColumns="False" Margin="253,24,0,0" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="Select">
                 </DataGridCheckBoxColumn>
@@ -73,7 +77,8 @@
         <Button Content="Move" HorizontalAlignment="Left" Margin="333,0,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Delete" HorizontalAlignment="Left" Margin="413,0,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Compress" HorizontalAlignment="Left" Margin="493,0,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="611,0,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Go" HorizontalAlignment="Left" Margin="736,0,0,0" VerticalAlignment="Top" Width="35" Height="18"/>
+        <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="18" Margin="373,0,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <Button Content="Go" HorizontalAlignment="Left" Margin="498,1,0,0" VerticalAlignment="Top" Width="35" Height="18" Click="Button_Click" Grid.Column="1" RenderTransformOrigin="1.402,0.57"/>
+        <Label x:Name="dirLabel" Content="Select a directory!" HorizontalAlignment="Left" Margin="585,-3,0,0" VerticalAlignment="Top" Width="418" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
